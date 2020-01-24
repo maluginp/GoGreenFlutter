@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gogreen/blocs/login/bloc.dart';
+import 'package:gogreen/generated/i18n.dart';
 
 class LoginWidget extends StatefulWidget {
 
@@ -59,16 +62,13 @@ class _LoginState extends State<StatefulWidget> {
   }
 
   void submit() {
-    Navigator.of(context).pushNamed("/add-record");
 
+    if (this._formKey.currentState.validate()) {
+      _formKey.currentState.save(); // Save our form now.
 
-    // First validate form.
-//    if (this._formKey.currentState.validate()) {
-//      _formKey.currentState.save(); // Save our form now.
-//
-//      print('Printing the login src.data.');
-//      print('Email: ${_data.username}');
-//      print('Password: ${_data.password}');
-//    }
+      BlocProvider.of<LoginBloc>(context)
+          .add(SignInLoginEvent(this._data.username, this._data.password));
+
+    }
   }
 }

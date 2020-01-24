@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      localizationsDelegates: [S.delegate],
+      supportedLocales: S.delegate.supportedLocales,
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

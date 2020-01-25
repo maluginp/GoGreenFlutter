@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'generated/i18n.dart';
+import 'screens/location_list_screen.dart';
 import 'screens/login_screen.dart';
 
 void main() => runApp(MyApp());
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen.open(context)
+        '/': (context) => LoginScreen.open(context),
+        '/locations': (ctx) => LocationListScreen.open(context)
       }
     );
   }

@@ -13,8 +13,13 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Login'),
       ),
-      body: BlocBuilder<LoginBloc, LoginState>(
-          builder: (context, LoginState state) {
+      body: BlocConsumer<LoginBloc, LoginState>(
+          listener: (context, state) {
+            if (state is SignedInLoginState) {
+              Navigator.of(context).pushReplacementNamed('/locations');
+            }
+          },
+          builder: (context, state) {
 
             if (state is InitialLoginState) {
               return LoginWidget();

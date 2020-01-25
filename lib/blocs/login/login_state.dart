@@ -8,3 +8,10 @@ class InitialLoginState extends LoginState {
   @override
   List<Object> get props => [];
 }
+
+
+class SignedInLoginState extends LoginState {
+
+  @override
+  List<Object> get props => [];
+}

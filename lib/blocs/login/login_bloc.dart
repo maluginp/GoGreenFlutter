@@ -17,8 +17,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async* {
 
     if (event is SignInLoginEvent) {
-      SignInLoginEvent signInLoginEvent = event;
-      _logService.d('Try to sign in as "${signInLoginEvent.username}"');
+      _logService.d('Try to sign in as "${event.username}"');
+
+      yield SignedInLoginState();
     }
 
     // TODO: Add Logic

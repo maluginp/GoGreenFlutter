@@ -1,3 +1,4 @@
+import 'package:gogreen/services/location_service.dart';
 import 'package:gogreen/services/log_service.dart';
 
 class Injector {
@@ -11,5 +12,9 @@ class Injector {
 
   ILogService get logService {
     return LogService();
+  }
+
+  ILocationService get locationService{
+    return LocationService();
   }
 }

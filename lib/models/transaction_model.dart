@@ -1,3 +1,3 @@
 class Transaction {
-
+  String amount;
 }

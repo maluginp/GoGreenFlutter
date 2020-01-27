@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gogreen/blocs/location_list/bloc.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/location_model.dart';
+import 'package:gogreen/screens/transaction_list_screen.dart';
 import 'package:gogreen/widgets/filter_widget.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
 
@@ -54,8 +55,8 @@ class LocationListScreen extends StatelessWidget {
           title: Text(location.name),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-            Navigator.of(context)
-                .pushNamed('/transactions', arguments: location);
+            Navigator.of(context).pushNamed(TransactionListScreen.ROUTE_PATH,
+                arguments: TransactionListArguments(location));
           },
         );
       },

@@ -1,5 +1,4 @@
-import 'package:gogreen/services/location_service.dart';
-import 'package:gogreen/services/log_service.dart';
+import 'package:gogreen/services/services.dart';
 
 class Injector {
   static final Injector _singleton = new Injector._internal();
@@ -16,5 +15,9 @@ class Injector {
 
   ILocationService get locationService{
     return LocationService();
+  }
+
+  ITransactionService get transactionService {
+    return TransactionService();
   }
 }

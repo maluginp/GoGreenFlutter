@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'generated/i18n.dart';
 import 'screens/location_list_screen.dart';
 import 'screens/login_screen.dart';
+import 'screens/transaction_list_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginScreen.open(context),
-        '/locations': (ctx) => LocationListScreen.open(context)
+        '/': (ctx) => LoginScreen.open(ctx),
+        '/locations': (ctx) => LocationListScreen.open(ctx),
+        TransactionListScreen.ROUTE_PATH: (ctx) => TransactionListScreen.open(ctx)
       }
     );
   }

@@ -7,8 +7,9 @@ import './bloc.dart';
 class GoodListBloc extends Bloc<GoodListEvent, GoodListState> {
   final ILogService _logService;
   final IStoreService _storeService;
+  final IOrderService _orderService;
 
-  GoodListBloc(this._logService, this._storeService);
+  GoodListBloc(this._logService, this._storeService, this._orderService);
 
   @override
   GoodListState get initialState => LoadingGoodListState();
@@ -20,6 +21,10 @@ class GoodListBloc extends Bloc<GoodListEvent, GoodListState> {
     if (event is FetchGoodListEvent) {
       List<Good> goods = await _storeService.fetchGoods();
       yield FetchedGoodListState(goods);
+    }
+
+    if (event is AddGoodToOrderGoodListEvent) {
+      await _orderService.addGood(event.good);
     }
   }
 }

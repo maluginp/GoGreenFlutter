@@ -16,6 +16,13 @@ class GoodListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Goods'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.of(context).pushNamed(OrderLinesScreen.ROUTE_PATH);
+              })
+        ],
       ),
       body: BlocBuilder<GoodListBloc, GoodListState>(
           builder: (context, GoodListState state) {
@@ -41,7 +48,8 @@ class GoodListScreen extends StatelessWidget {
           title: Text(good.name),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-//            Navigator.of(context).pushNamed(GoodListScreen.ROUTE_PATH);
+            BlocProvider.of<GoodListBloc>(context)
+                .add(AddGoodToOrderGoodListEvent(good));
           },
         );
       },
@@ -52,8 +60,8 @@ class GoodListScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<GoodListBloc>(
-            create: (ctx) => GoodListBloc(
-                Injector().logService, Injector().storeService)
+            create: (ctx) => GoodListBloc(Injector().logService,
+                Injector().storeService, Injector().orderService)
               ..add(FetchGoodListEvent())),
       ],
       child: GoodListScreen(),

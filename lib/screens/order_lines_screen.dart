@@ -15,7 +15,7 @@ class OrderLinesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Locations'),
+        title: Text('Order Lines'),
       ),
       body: BlocBuilder<OrderLinesBloc, OrderLinesState>(
           builder: (context, OrderLinesState state) {

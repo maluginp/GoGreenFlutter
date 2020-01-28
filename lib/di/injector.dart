@@ -20,4 +20,8 @@ class Injector {
   ITransactionService get transactionService {
     return TransactionService();
   }
+
+  IStoreLocationsService get storeLocationsService {
+    return StoreLocationsService();
+  }
 }

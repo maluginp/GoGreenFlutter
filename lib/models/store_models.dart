@@ -1,3 +1,7 @@
+class Store {
+  String name;
+}
+
 class Good {
 
 }

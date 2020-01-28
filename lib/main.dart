@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'generated/i18n.dart';
-import 'screens/location_list_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/transaction_list_screen.dart';
-import 'screens/transaction_receipt_screen.dart';
+import 'screens/screens.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -33,7 +31,12 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => LoginScreen.open(ctx),
         '/locations': (ctx) => LocationListScreen.open(ctx),
         TransactionListScreen.ROUTE_PATH: (ctx) => TransactionListScreen.open(ctx),
-        TransactionReceiptScreen.ROUTE_PATH: (ctx) => TransactionReceiptScreen.open(ctx)
+        TransactionReceiptScreen.ROUTE_PATH: (ctx) => TransactionReceiptScreen.open(ctx),
+        StoreListScreen.ROUTE_PATH: (ctx) => StoreListScreen.open(ctx),
+        DepartmentListScreen.ROUTE_PATH: (ctx) => DepartmentListScreen.open(ctx),
+        GoodListScreen.ROUTE_PATH: (ctx) => GoodListScreen.open(ctx),
+        OrderLinesScreen.ROUTE_PATH: (ctx) => OrderLinesScreen.open(ctx),
+        OrderListScreen.ROUTE_PATH: (ctx) => OrderListScreen.open(ctx)
       }
     );
   }

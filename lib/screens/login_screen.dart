@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gogreen/blocs/login/bloc.dart';
 import 'package:gogreen/di/injector.dart';
+import 'package:gogreen/screens/screens.dart';
 import 'package:gogreen/widgets/login_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -16,7 +17,8 @@ class LoginScreen extends StatelessWidget {
       body: BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state is SignedInLoginState) {
-              Navigator.of(context).pushReplacementNamed('/locations');
+//              Navigator.of(context).pushReplacementNamed('/locations');
+              Navigator.of(context).pushReplacementNamed(StoreListScreen.ROUTE_PATH);
             }
           },
           builder: (context, state) {

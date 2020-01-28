@@ -3,13 +3,13 @@ class Store {
 }
 
 class Good {
-
+  String name;
 }
 
 class Service {
-
+  String name;
 }
 
 class Department {
-
+  String name;
 }

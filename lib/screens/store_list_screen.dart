@@ -4,6 +4,7 @@ import 'package:gogreen/blocs/store_list/bloc.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/store_models.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
+import 'package:gogreen/screens/screens.dart';
 
 class StoreListScreen extends StatelessWidget {
   static const String ROUTE_PATH = "/stores";
@@ -40,8 +41,7 @@ class StoreListScreen extends StatelessWidget {
           title: Text(location.name),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-//            Navigator.of(context).pushNamed(TransactionListScreen.ROUTE_PATH,
-//                arguments: TransactionListArguments(location));
+            Navigator.of(context).pushNamed(DepartmentListScreen.ROUTE_PATH);
           },
         );
       },

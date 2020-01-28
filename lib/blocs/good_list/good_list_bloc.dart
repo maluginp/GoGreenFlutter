@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:gogreen/models/order_models.dart';
 import 'package:gogreen/models/store_models.dart';
 import 'package:gogreen/services/services.dart';
 import './bloc.dart';
@@ -24,7 +25,8 @@ class GoodListBloc extends Bloc<GoodListEvent, GoodListState> {
     }
 
     if (event is AddGoodToOrderGoodListEvent) {
-      await _orderService.addGood(event.good);
+      OrderLineItem lineItem = await _orderService.addGood(event.good);
+      yield AddedToOrderGoodListState(lineItem);
     }
   }
 }

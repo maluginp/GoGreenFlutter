@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gogreen/blocs/good_list/bloc.dart';
+import 'package:gogreen/blocs/total_quantity_order/bloc.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/store_models.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
 import 'package:gogreen/screens/screens.dart';
+import 'package:gogreen/widgets/total_quantity_order_widget.dart';
 
 class GoodListScreen extends StatelessWidget {
   static const String ROUTE_PATH = "/goods";
@@ -24,7 +26,19 @@ class GoodListScreen extends StatelessWidget {
               })
         ],
       ),
-      body: BlocBuilder<GoodListBloc, GoodListState>(
+      body: BlocConsumer<GoodListBloc, GoodListState>(
+          listener: (context, state) {
+            if (state is AddedToOrderGoodListState) {
+              BlocProvider.of<TotalQuantityOrderBloc>(context).add(UpdateTotalQuantityOrderEvent());
+            }
+          },
+          buildWhen: (prevState, nextState) {
+            if (nextState is AddedToOrderGoodListState) {
+              return false;
+            }
+
+            return true;
+          },
           builder: (context, GoodListState state) {
         if (state is LoadingGoodListState) {
           return LoadingWidget();
@@ -36,6 +50,7 @@ class GoodListScreen extends StatelessWidget {
 
         return Container();
       }),
+      bottomSheet: TotalQuantityOrderWidget(),
     );
   }
 
@@ -63,6 +78,10 @@ class GoodListScreen extends StatelessWidget {
             create: (ctx) => GoodListBloc(Injector().logService,
                 Injector().storeService, Injector().orderService)
               ..add(FetchGoodListEvent())),
+        BlocProvider<TotalQuantityOrderBloc>(
+            create: (ctx) => TotalQuantityOrderBloc(
+                Injector().logService, Injector().orderService)
+              ..add(UpdateTotalQuantityOrderEvent())),
       ],
       child: GoodListScreen(),
     );

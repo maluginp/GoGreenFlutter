@@ -14,22 +14,27 @@ class OrderLinesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Order Lines'),
-      ),
-      body: BlocBuilder<OrderLinesBloc, OrderLinesState>(
-          builder: (context, OrderLinesState state) {
-        if (state is LoadingOrderLinesState) {
-          return LoadingWidget();
-        }
+        appBar: AppBar(
+          title: Text('Order Lines'),
+        ),
+        body: BlocBuilder<OrderLinesBloc, OrderLinesState>(
+            builder: (context, OrderLinesState state) {
+          if (state is LoadingOrderLinesState) {
+            return LoadingWidget();
+          }
 
-        if (state is FetchedOrderLinesState) {
-          return _buildListView(state.lines);
-        }
+          if (state is FetchedOrderLinesState) {
+            return _buildListView(state.lines);
+          }
 
-        return Container();
-      }),
-    );
+          return Container();
+        }),
+        bottomSheet: SizedBox(
+            width: double.infinity,
+            child: FlatButton(
+              child: Text('Checkout'),
+              onPressed: () {},
+            )));
   }
 
   _buildListView(List<OrderLineItem> lines) {
@@ -53,9 +58,9 @@ class OrderLinesScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<OrderLinesBloc>(
-            create: (ctx) => OrderLinesBloc(
-                Injector().logService, Injector().orderService)
-              ..add(FetchOrderLinesEvent())),
+            create: (ctx) =>
+                OrderLinesBloc(Injector().logService, Injector().orderService)
+                  ..add(FetchOrderLinesEvent())),
       ],
       child: OrderLinesScreen(),
     );

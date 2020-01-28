@@ -15,7 +15,7 @@ class StoreListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Locations'),
+        title: Text('Stores'),
       ),
       body: BlocBuilder<StoreListBloc, StoreListState>(
           builder: (context, StoreListState state) {

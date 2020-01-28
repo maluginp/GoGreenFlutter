@@ -4,6 +4,7 @@ import 'package:gogreen/blocs/department_list/bloc.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/store_models.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
+import 'screens.dart';
 
 class DepartmentListScreen extends StatelessWidget {
   static const String ROUTE_PATH = "/departments";
@@ -15,6 +16,11 @@ class DepartmentListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Departments'),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.history), onPressed: (){
+            Navigator.of(context).pushNamed(OrderListScreen.ROUTE_PATH);
+          })
+        ],
       ),
       body: BlocBuilder<DepartmentListBloc, DepartmentListState>(
           builder: (context, DepartmentListState state) {
@@ -40,8 +46,7 @@ class DepartmentListScreen extends StatelessWidget {
           title: Text(department.name),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-//            Navigator.of(context).pushNamed(TransactionListScreen.ROUTE_PATH,
-//                arguments: TransactionListArguments(location));
+            Navigator.of(context).pushNamed(GoodListScreen.ROUTE_PATH);
           },
         );
       },

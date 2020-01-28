@@ -41,7 +41,7 @@ class GoodListScreen extends StatelessWidget {
           title: Text(good.name),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-            Navigator.of(context).pushNamed(GoodListScreen.ROUTE_PATH);
+//            Navigator.of(context).pushNamed(GoodListScreen.ROUTE_PATH);
           },
         );
       },

@@ -9,7 +9,7 @@ abstract class ITransactionService {
 class TransactionService implements ITransactionService {
 
   @override
-  Future<List<Transaction>> fetchTransactions(TransactionListFilter filter) => Future.value([]);
+  Future<List<Transaction>> fetchTransactions(TransactionListFilter filter) => Future.value([Transaction()..amount="sd"]);
 
   @override
   Future<String> fetchReceipt() => Future.value("<h1>Hello World</h1>");

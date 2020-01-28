@@ -4,6 +4,7 @@ import 'generated/i18n.dart';
 import 'screens/location_list_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/transaction_list_screen.dart';
+import 'screens/transaction_receipt_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (ctx) => LoginScreen.open(ctx),
         '/locations': (ctx) => LocationListScreen.open(ctx),
-        TransactionListScreen.ROUTE_PATH: (ctx) => TransactionListScreen.open(ctx)
+        TransactionListScreen.ROUTE_PATH: (ctx) => TransactionListScreen.open(ctx),
+        TransactionReceiptScreen.ROUTE_PATH: (ctx) => TransactionReceiptScreen.open(ctx)
       }
     );
   }

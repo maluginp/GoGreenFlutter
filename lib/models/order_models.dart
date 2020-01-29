@@ -13,6 +13,7 @@ class OrderLineItem {
   String goodGuid;
   double price;
   String image;
+  int quantity;
 
   OrderLineItem();
 

@@ -1,4 +1,5 @@
 class Store {
+  String guid;
   String name;
 }
 

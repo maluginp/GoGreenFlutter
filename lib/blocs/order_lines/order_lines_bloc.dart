@@ -21,5 +21,12 @@ class OrderLinesBloc extends Bloc<OrderLinesEvent, OrderLinesState> {
       List<OrderLineItem> lines = await _orderService.fetchLines();
       yield FetchedOrderLinesState(lines);
     }
+
+    if (event is CheckoutOrderLinesEvent) {
+      await _orderService.checkout();
+      yield LoadingOrderLinesState();
+      List<OrderLineItem> lines = await _orderService.fetchLines();
+      yield FetchedOrderLinesState(lines);
+    }
   }
 }

@@ -17,5 +17,5 @@ class FetchedOrderLinesState extends OrderLinesState {
   FetchedOrderLinesState(this.lines);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [lines.length];
 }

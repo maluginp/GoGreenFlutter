@@ -8,3 +8,8 @@ class FetchOrderLinesEvent extends OrderLinesEvent {
   @override
   List<Object> get props => [];
 }
+
+class CheckoutOrderLinesEvent extends OrderLinesEvent {
+  @override
+  List<Object> get props => [];
+}

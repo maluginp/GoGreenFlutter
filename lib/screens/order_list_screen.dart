@@ -33,7 +33,7 @@ class OrderListScreen extends StatelessWidget {
   }
 
   _buildListView(List<Order> orders) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: orders.length,
       itemBuilder: (context, i) {
         var order = orders[i];
@@ -45,6 +45,9 @@ class OrderListScreen extends StatelessWidget {
           },
         );
       },
+      separatorBuilder: (context, i) => Divider(
+        color: Colors.black,
+      ),
     );
   }
 

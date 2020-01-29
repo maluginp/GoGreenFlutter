@@ -5,7 +5,11 @@ class GoGreenTheme {
       primarySwatch: Colors.green,
       textTheme: _textTheme,
       accentColor: Colors.green,
-      accentTextTheme: _accentTextTheme
+      accentTextTheme: _accentTextTheme,
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.green,
+        textTheme: ButtonTextTheme.primary
+      )
   );
 
   static const _regular = FontWeight.w400;

@@ -51,7 +51,10 @@ class DepartmentListScreen extends StatelessWidget {
           title: Text(department.name),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-            Navigator.of(context).pushNamed(GoodListScreen.ROUTE_PATH);
+            Navigator.of(context).pushNamed(
+                GoodListScreen.ROUTE_PATH,
+                arguments: GoodListArgument(department.guid, department.name)
+            );
           },
         );
       },

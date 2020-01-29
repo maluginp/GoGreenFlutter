@@ -12,13 +12,15 @@ import 'package:gogreen/widgets/total_quantity_order_widget.dart';
 class GoodListScreen extends StatelessWidget {
   static const String ROUTE_PATH = "/goods";
 
-  const GoodListScreen();
+  final String title;
+
+  const GoodListScreen(this.title);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Goods'),
+        title: Text(title),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.shopping_cart),
@@ -63,10 +65,17 @@ class GoodListScreen extends StatelessWidget {
         return ListTile(
           title: Text(good.name),
           leading: Image.network(good.image),
-          trailing: Text(Formatter.currency(good.price)),
+          trailing: (good is !SubDepartmentGood) ? Text(Formatter.currency(good.price)) : null,
           onTap: () {
-            BlocProvider.of<GoodListBloc>(context)
-                .add(AddGoodToOrderGoodListEvent(good));
+            if (good is !SubDepartmentGood) {
+              BlocProvider.of<GoodListBloc>(context)
+                  .add(AddGoodToOrderGoodListEvent(good));
+            } else {
+              Navigator.of(context).pushNamed(
+                  GoodListScreen.ROUTE_PATH,
+                  arguments: GoodListArgument(good.guid, good.name)
+              );
+            }
           },
         );
       },
@@ -76,19 +85,29 @@ class GoodListScreen extends StatelessWidget {
     );
   }
 
-  static Widget open(BuildContext context) {
+  static Widget open(BuildContext context, GoodListArgument arg) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<GoodListBloc>(
             create: (ctx) => GoodListBloc(Injector().logService,
-                Injector().storeService, Injector().orderService)
+                Injector().storeService,
+                Injector().orderService,
+                arg.departmentGuid
+            )
               ..add(FetchGoodListEvent())),
         BlocProvider<TotalQuantityOrderBloc>(
             create: (ctx) => TotalQuantityOrderBloc(
                 Injector().logService, Injector().orderService)
               ..add(UpdateTotalQuantityOrderEvent())),
       ],
-      child: GoodListScreen(),
+      child: GoodListScreen(arg.title),
     );
   }
+}
+
+class GoodListArgument {
+  String departmentGuid;
+  String title;
+
+  GoodListArgument(this.departmentGuid, this.title);
 }

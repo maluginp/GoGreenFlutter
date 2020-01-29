@@ -9,8 +9,9 @@ class GoodListBloc extends Bloc<GoodListEvent, GoodListState> {
   final ILogService _logService;
   final IStoreService _storeService;
   final IOrderService _orderService;
+  final String departmentGuid;
 
-  GoodListBloc(this._logService, this._storeService, this._orderService);
+  GoodListBloc(this._logService, this._storeService, this._orderService, this.departmentGuid);
 
   @override
   GoodListState get initialState => LoadingGoodListState();

@@ -27,6 +27,10 @@ class StoreService extends IStoreService {
           ..name = "Burger"
           ..image = "https://www.iconninja.com/files/458/848/840/junk-food-food-burger-hamburger-fast-food-icon.png"
           ..price = 2.00,
+        SubDepartmentGood()
+          ..guid = "b12ga35-asdasd-123gh"
+          ..name = "Sandwiches"
+          ..image = "http://www.i2clipart.com/cliparts/f/5/d/5/clipart-vegetarian-sandwich-f5d5.png",
         Good()
           ..guid = "12hkasd-1daaaadbb-caaaa"
           ..name = "Coca-Cola"

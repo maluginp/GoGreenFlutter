@@ -9,6 +9,15 @@ class Good {
   double price;
 }
 
+class Department {
+  String guid;
+  String name;
+}
+
+class SubDepartmentGood extends Good {
+
+}
+
 class Modifier {
 
 }
@@ -18,9 +27,5 @@ class Option {
 }
 
 class Service {
-  String name;
-}
-
-class Department {
   String name;
 }

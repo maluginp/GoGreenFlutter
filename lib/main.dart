@@ -37,10 +37,14 @@ class MyApp extends StatelessWidget {
         TransactionReceiptScreen.ROUTE_PATH: (ctx) => TransactionReceiptScreen.open(ctx),
         StoreListScreen.ROUTE_PATH: (ctx) => StoreListScreen.open(ctx),
         DepartmentListScreen.ROUTE_PATH: (ctx) => DepartmentListScreen.open(ctx),
-        GoodListScreen.ROUTE_PATH: (ctx) => GoodListScreen.open(ctx),
+        GoodListScreen.ROUTE_PATH: (ctx) => GoodListScreen.open(ctx, _getArg(ctx)),
         OrderLinesScreen.ROUTE_PATH: (ctx) => OrderLinesScreen.open(ctx),
         OrderListScreen.ROUTE_PATH: (ctx) => OrderListScreen.open(ctx)
       }
     );
+  }
+
+  _getArg(ctx) {
+    return ModalRoute.of(ctx).settings.arguments;
   }
 }

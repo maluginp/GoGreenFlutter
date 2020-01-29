@@ -43,7 +43,7 @@ class DepartmentListScreen extends StatelessWidget {
   }
 
   _buildListView(List<Department> departments) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: departments.length,
       itemBuilder: (context, i) {
         var department = departments[i];
@@ -60,6 +60,9 @@ class DepartmentListScreen extends StatelessWidget {
           },
         );
       },
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.black,
+      )
     );
   }
 

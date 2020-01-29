@@ -3,7 +3,18 @@ class Store {
 }
 
 class Good {
+  String guid;
   String name;
+  String image;
+  double price;
+}
+
+class Modifier {
+
+}
+
+class Option {
+
 }
 
 class Service {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gogreen/blocs/good_list/bloc.dart';
 import 'package:gogreen/blocs/total_quantity_order/bloc.dart';
+import 'package:gogreen/core/formatter.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/store_models.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
@@ -55,19 +56,23 @@ class GoodListScreen extends StatelessWidget {
   }
 
   _buildListView(List<Good> goods) {
-    return ListView.builder(
+    return ListView.separated(
       itemCount: goods.length,
       itemBuilder: (context, i) {
         var good = goods[i];
         return ListTile(
           title: Text(good.name),
-          trailing: Icon(Icons.keyboard_arrow_right),
+          leading: Image.network(good.image),
+          trailing: Text(Formatter.currency(good.price)),
           onTap: () {
             BlocProvider.of<GoodListBloc>(context)
                 .add(AddGoodToOrderGoodListEvent(good));
           },
         );
       },
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.black,
+      )
     );
   }
 

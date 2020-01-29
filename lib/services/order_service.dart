@@ -24,7 +24,7 @@ class OrderService extends IOrderService {
 
   @override
   Future<OrderLineItem> addGood(Good good) {
-    var line = OrderLineItem()..name=good.name;
+    var line = OrderLineItem.fromGood(good);
     lines.add(line);
     return Future.value(line);
   }

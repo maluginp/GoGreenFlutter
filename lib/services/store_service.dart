@@ -18,7 +18,11 @@ class StoreLocationsService extends IStoreLocationsService {
 class StoreService extends IStoreService {
   @override
   Future<List<Department>> fetchDepartments() =>
-      Future.value([Department()..name = "Test"]);
+      Future.value([Department()
+        ..guid = "b12ga35-asdasd-123ghff"
+        ..name = "Sandwiches"
+        ..image = "http://www.i2clipart.com/cliparts/f/5/d/5/clipart-vegetarian-sandwich-f5d5.png",
+      ]);
 
   @override
   Future<List<Good>> fetchGoods() => Future.value([

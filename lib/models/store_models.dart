@@ -12,6 +12,7 @@ class Good {
 class Department {
   String guid;
   String name;
+  String image;
 }
 
 class SubDepartmentGood extends Good {

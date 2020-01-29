@@ -48,7 +48,9 @@ class DepartmentListScreen extends StatelessWidget {
       itemBuilder: (context, i) {
         var department = departments[i];
         return ListTile(
+          contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           title: Text(department.name),
+          leading: Image.network(department.image),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
             Navigator.of(context).pushNamed(

@@ -18,17 +18,18 @@ class OrderListScreen extends StatelessWidget {
         title: Text('Orders'),
       ),
       body: BlocBuilder<OrderListBloc, OrderListState>(
-          builder: (context, OrderListState state) {
-        if (state is LoadingOrderListState) {
-          return LoadingWidget();
-        }
+        builder: (context, OrderListState state) {
+          if (state is LoadingOrderListState) {
+            return LoadingWidget();
+          }
 
-        if (state is FetchedOrderListState) {
-          return _buildListView(state.orders);
-        }
+          if (state is FetchedOrderListState) {
+            return _buildListView(state.orders);
+          }
 
-        return Container();
-      }),
+          return Container();
+        },
+      ),
     );
   }
 
@@ -41,7 +42,9 @@ class OrderListScreen extends StatelessWidget {
           title: Text(order.name),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-            Navigator.of(context).pushNamed(OrderLinesScreen.ROUTE_PATH);
+            Navigator.of(context).pushNamed(
+              OrderLinesScreen.ROUTE_PATH,
+            );
           },
         );
       },
@@ -55,9 +58,11 @@ class OrderListScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<OrderListBloc>(
-            create: (ctx) => OrderListBloc(
-                Injector().logService, Injector().orderHistoryService)
-              ..add(FetchOrderListEvent())),
+          create: (ctx) => OrderListBloc(
+            Injector().logService,
+            Injector().orderHistoryService,
+          )..add(FetchOrderListEvent()),
+        ),
       ],
       child: OrderListScreen(),
     );

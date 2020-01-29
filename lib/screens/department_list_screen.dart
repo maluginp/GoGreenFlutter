@@ -20,24 +20,26 @@ class DepartmentListScreen extends StatelessWidget {
         title: Text('Departments'),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.history),
-              onPressed: () {
-                Navigator.of(context).pushNamed(OrderListScreen.ROUTE_PATH);
-              })
+            icon: Icon(Icons.history),
+            onPressed: () {
+              Navigator.of(context).pushNamed(OrderListScreen.ROUTE_PATH);
+            },
+          ),
         ],
       ),
       body: BlocBuilder<DepartmentListBloc, DepartmentListState>(
-          builder: (context, DepartmentListState state) {
-        if (state is LoadingDepartmentListState) {
-          return LoadingWidget();
-        }
+        builder: (context, DepartmentListState state) {
+          if (state is LoadingDepartmentListState) {
+            return LoadingWidget();
+          }
 
-        if (state is FetchedDepartmentListState) {
-          return _buildListView(state.departments);
-        }
+          if (state is FetchedDepartmentListState) {
+            return _buildListView(state.departments);
+          }
 
-        return Container();
-      }),
+          return Container();
+        },
+      ),
       bottomSheet: TotalOrderWidget(),
     );
   }
@@ -53,16 +55,17 @@ class DepartmentListScreen extends StatelessWidget {
           leading: Image.network(department.image),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-            Navigator.of(context).pushNamed(
-                GoodListScreen.ROUTE_PATH,
-                arguments: GoodListArgument(department.guid, department.name)
-            );
+            Navigator.of(context).pushNamed(GoodListScreen.ROUTE_PATH,
+                arguments: GoodListArgument(
+                  department.guid,
+                  department.name,
+                ));
           },
         );
       },
       separatorBuilder: (context, index) => Divider(
         color: Colors.black,
-      )
+      ),
     );
   }
 
@@ -70,13 +73,17 @@ class DepartmentListScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<DepartmentListBloc>(
-            create: (ctx) => DepartmentListBloc(
-                Injector().logService, Injector().storeService)
-              ..add(FetchDepartmentListEvent())),
+          create: (ctx) => DepartmentListBloc(
+            Injector().logService,
+            Injector().storeService,
+          )..add(FetchDepartmentListEvent()),
+        ),
         BlocProvider<TotalOrderBloc>(
-            create: (ctx) => TotalOrderBloc(
-                Injector().logService, Injector().orderService)
-              ..add(GetTotalOrderEvent())),
+          create: (ctx) => TotalOrderBloc(
+            Injector().logService,
+            Injector().orderService,
+          )..add(GetTotalOrderEvent()),
+        ),
       ],
       child: DepartmentListScreen(),
     );

@@ -26,33 +26,34 @@ class GoodListScreen extends StatelessWidget {
               icon: Icon(Icons.shopping_cart),
               onPressed: () {
                 Navigator.of(context).pushNamed(OrderLinesScreen.ROUTE_PATH);
-              })
+              }),
         ],
       ),
       body: BlocConsumer<GoodListBloc, GoodListState>(
-          listener: (context, state) {
-            if (state is AddedToOrderGoodListState) {
-              BlocProvider.of<TotalOrderBloc>(context).add(GetTotalOrderEvent());
-            }
-          },
-          buildWhen: (prevState, nextState) {
-            if (nextState is AddedToOrderGoodListState) {
-              return false;
-            }
+        listener: (context, state) {
+          if (state is AddedToOrderGoodListState) {
+            BlocProvider.of<TotalOrderBloc>(context).add(GetTotalOrderEvent());
+          }
+        },
+        buildWhen: (prevState, nextState) {
+          if (nextState is AddedToOrderGoodListState) {
+            return false;
+          }
 
-            return true;
-          },
-          builder: (context, GoodListState state) {
-        if (state is LoadingGoodListState) {
-          return LoadingWidget();
-        }
+          return true;
+        },
+        builder: (context, GoodListState state) {
+          if (state is LoadingGoodListState) {
+            return LoadingWidget();
+          }
 
-        if (state is FetchedGoodListState) {
-          return _buildListView(state.goods);
-        }
+          if (state is FetchedGoodListState) {
+            return _buildListView(state.goods);
+          }
 
-        return Container();
-      }),
+          return Container();
+        },
+      ),
       bottomSheet: TotalOrderWidget(),
     );
   }
@@ -65,15 +66,15 @@ class GoodListScreen extends StatelessWidget {
         return ListTile(
           title: Text(good.name),
           leading: Image.network(good.image),
-          trailing: (good is !SubDepartmentGood) ? Text(Formatter.currency(good.price)) : null,
+          trailing: _getTrailing(good),
           onTap: () {
-            if (good is !SubDepartmentGood) {
+            if (good is! SubDepartmentGood) {
               BlocProvider.of<GoodListBloc>(context)
                   .add(AddGoodToOrderGoodListEvent(good));
             } else {
               Navigator.of(context).pushNamed(
-                  GoodListScreen.ROUTE_PATH,
-                  arguments: GoodListArgument(good.guid, good.name)
+                GoodListScreen.ROUTE_PATH,
+                arguments: GoodListArgument(good.guid, good.name),
               );
             }
           },
@@ -81,7 +82,7 @@ class GoodListScreen extends StatelessWidget {
       },
       separatorBuilder: (context, index) => Divider(
         color: Colors.black,
-      )
+      ),
     );
   }
 
@@ -89,19 +90,30 @@ class GoodListScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<GoodListBloc>(
-            create: (ctx) => GoodListBloc(Injector().logService,
-                Injector().storeService,
-                Injector().orderService,
-                arg.departmentGuid
-            )
-              ..add(FetchGoodListEvent())),
+          create: (ctx) => GoodListBloc(
+            Injector().logService,
+            Injector().storeService,
+            Injector().orderService,
+            arg.departmentGuid,
+          )..add(FetchGoodListEvent()),
+        ),
         BlocProvider<TotalOrderBloc>(
-            create: (ctx) => TotalOrderBloc(
-                Injector().logService, Injector().orderService)
-              ..add(GetTotalOrderEvent())),
+          create: (ctx) => TotalOrderBloc(
+            Injector().logService,
+            Injector().orderService,
+          )..add(GetTotalOrderEvent()),
+        ),
       ],
       child: GoodListScreen(arg.title),
     );
+  }
+
+  _getTrailing(Good good) {
+    if (good is! SubDepartmentGood) {
+      return Text(Formatter.currency(good.price));
+    } else {
+      return Icon(Icons.keyboard_arrow_right);
+    }
   }
 }
 

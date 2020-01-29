@@ -18,17 +18,18 @@ class StoreListScreen extends StatelessWidget {
         title: Text('Stores'),
       ),
       body: BlocBuilder<StoreListBloc, StoreListState>(
-          builder: (context, StoreListState state) {
-        if (state is LoadingStoreListState) {
-          return LoadingWidget();
-        }
+        builder: (context, StoreListState state) {
+          if (state is LoadingStoreListState) {
+            return LoadingWidget();
+          }
 
-        if (state is FetchedStoreListState) {
-          return _buildListView(state.stores);
-        }
+          if (state is FetchedStoreListState) {
+            return _buildListView(state.stores);
+          }
 
-        return Container();
-      }),
+          return Container();
+        },
+      ),
     );
   }
 
@@ -41,7 +42,9 @@ class StoreListScreen extends StatelessWidget {
           title: Text(location.name),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-            Navigator.of(context).pushNamed(DepartmentListScreen.ROUTE_PATH);
+            Navigator.of(context).pushNamed(
+              DepartmentListScreen.ROUTE_PATH,
+            );
           },
         );
       },
@@ -52,9 +55,11 @@ class StoreListScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<StoreListBloc>(
-            create: (ctx) => StoreListBloc(
-                Injector().logService, Injector().storeLocationsService)
-              ..add(FetchStoreListEvent())),
+          create: (ctx) => StoreListBloc(
+            Injector().logService,
+            Injector().storeLocationsService,
+          )..add(FetchStoreListEvent()),
+        ),
       ],
       child: StoreListScreen(),
     );

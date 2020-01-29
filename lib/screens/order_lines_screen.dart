@@ -40,8 +40,10 @@ class OrderLinesScreen extends StatelessWidget {
           height: Dimens.of(context).bottomButtonHeight,
           color: Theme.of(context).accentColor,
           child: Center(
-            child: Text('Checkout',
-                style: Theme.of(context).accentTextTheme.button),
+            child: Text(
+              'Checkout',
+              style: Theme.of(context).accentTextTheme.button,
+            ),
           ),
         ),
       ),

@@ -15,27 +15,36 @@ class LoginScreen extends StatelessWidget {
         title: Text('Login'),
       ),
       body: BlocConsumer<LoginBloc, LoginState>(
-          listener: (context, state) {
-            if (state is SignedInLoginState) {
+        listener: (context, state) {
+          if (state is SignedInLoginState) {
 //              Navigator.of(context).pushReplacementNamed('/locations');
-              Navigator.of(context).pushReplacementNamed(StoreListScreen.ROUTE_PATH);
-            }
-          },
-          builder: (context, state) {
+            Navigator.of(context).pushReplacementNamed(
+              StoreListScreen.ROUTE_PATH,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is InitialLoginState) {
+            return Container(
+              padding: EdgeInsets.all(16.0),
+              child: LoginWidget(),
+            );
+          }
 
-            if (state is InitialLoginState) {
-              return LoginWidget();
-            }
-
-            return Container();
-          }),
+          return Container();
+        },
+      ),
     );
   }
 
   static Widget open(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LoginBloc>(create: (ctx) => LoginBloc(Injector().logService)),
+        BlocProvider<LoginBloc>(
+          create: (ctx) => LoginBloc(
+            Injector().logService,
+          ),
+        ),
       ],
       child: LoginScreen(),
     );

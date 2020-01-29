@@ -1,18 +1,18 @@
 import 'package:equatable/equatable.dart';
 
-abstract class TotalQuantityOrderState extends Equatable {
-  const TotalQuantityOrderState();
+abstract class TotalOrderState extends Equatable {
+  const TotalOrderState();
 }
 
-class InitialTotalQuantityOrderState extends TotalQuantityOrderState {
+class InitialTotalOrderState extends TotalOrderState {
   @override
   List<Object> get props => [];
 }
 
-class UpdatedTotalQuantityOrderState extends TotalQuantityOrderState {
+class CalculatedTotalOrderState extends TotalOrderState {
   final int totalQuantity;
 
-  UpdatedTotalQuantityOrderState(this.totalQuantity);
+  CalculatedTotalOrderState(this.totalQuantity);
 
   @override
   List<Object> get props => [totalQuantity];

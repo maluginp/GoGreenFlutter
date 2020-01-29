@@ -73,10 +73,10 @@ class DepartmentListScreen extends StatelessWidget {
             create: (ctx) => DepartmentListBloc(
                 Injector().logService, Injector().storeService)
               ..add(FetchDepartmentListEvent())),
-        BlocProvider<TotalQuantityOrderBloc>(
-            create: (ctx) => TotalQuantityOrderBloc(
+        BlocProvider<TotalOrderBloc>(
+            create: (ctx) => TotalOrderBloc(
                 Injector().logService, Injector().orderService)
-              ..add(UpdateTotalQuantityOrderEvent())),
+              ..add(GetTotalOrderEvent())),
       ],
       child: DepartmentListScreen(),
     );

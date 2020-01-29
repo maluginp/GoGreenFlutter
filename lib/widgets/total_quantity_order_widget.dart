@@ -6,10 +6,10 @@ import 'package:gogreen/screens/screens.dart';
 class TotalQuantityOrderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TotalQuantityOrderBloc, TotalQuantityOrderState>(
+    return BlocConsumer<TotalOrderBloc, TotalOrderState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is UpdatedTotalQuantityOrderState) {
+          if (state is CalculatedTotalOrderState) {
             return Container(
               color: Theme.of(context).accentColor,
                 child: ListTile(

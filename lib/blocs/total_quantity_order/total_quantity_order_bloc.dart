@@ -4,22 +4,22 @@ import 'package:gogreen/models/order_models.dart';
 import 'package:gogreen/services/services.dart';
 import './bloc.dart';
 
-class TotalQuantityOrderBloc extends Bloc<TotalQuantityOrderEvent, TotalQuantityOrderState> {
+class TotalOrderBloc extends Bloc<TotalOrderEvent, TotalOrderState> {
   final ILogService _logService;
   final IOrderService _orderService;
 
-  TotalQuantityOrderBloc(this._logService, this._orderService);
+  TotalOrderBloc(this._logService, this._orderService);
 
   @override
-  TotalQuantityOrderState get initialState => InitialTotalQuantityOrderState();
+  TotalOrderState get initialState => InitialTotalOrderState();
 
   @override
-  Stream<TotalQuantityOrderState> mapEventToState(
-    TotalQuantityOrderEvent event,
+  Stream<TotalOrderState> mapEventToState(
+    TotalOrderEvent event,
   ) async* {
-    if (event is UpdateTotalQuantityOrderEvent) {
+    if (event is GetTotalOrderEvent) {
       List<OrderLineItem> lines = await _orderService.fetchLines();
-      yield UpdatedTotalQuantityOrderState(lines.length);
+      yield CalculatedTotalOrderState(lines.length);
     }
   }
 }

@@ -32,7 +32,7 @@ class GoodListScreen extends StatelessWidget {
       body: BlocConsumer<GoodListBloc, GoodListState>(
           listener: (context, state) {
             if (state is AddedToOrderGoodListState) {
-              BlocProvider.of<TotalQuantityOrderBloc>(context).add(UpdateTotalQuantityOrderEvent());
+              BlocProvider.of<TotalOrderBloc>(context).add(GetTotalOrderEvent());
             }
           },
           buildWhen: (prevState, nextState) {
@@ -95,10 +95,10 @@ class GoodListScreen extends StatelessWidget {
                 arg.departmentGuid
             )
               ..add(FetchGoodListEvent())),
-        BlocProvider<TotalQuantityOrderBloc>(
-            create: (ctx) => TotalQuantityOrderBloc(
+        BlocProvider<TotalOrderBloc>(
+            create: (ctx) => TotalOrderBloc(
                 Injector().logService, Injector().orderService)
-              ..add(UpdateTotalQuantityOrderEvent())),
+              ..add(GetTotalOrderEvent())),
       ],
       child: GoodListScreen(arg.title),
     );

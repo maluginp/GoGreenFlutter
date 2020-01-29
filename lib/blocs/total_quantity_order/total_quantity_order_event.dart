@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-abstract class TotalQuantityOrderEvent extends Equatable {
-  const TotalQuantityOrderEvent();
+abstract class TotalOrderEvent extends Equatable {
+  const TotalOrderEvent();
 }
 
-class UpdateTotalQuantityOrderEvent extends TotalQuantityOrderEvent {
+class GetTotalOrderEvent extends TotalOrderEvent {
   @override
   List<Object> get props => [];
 }

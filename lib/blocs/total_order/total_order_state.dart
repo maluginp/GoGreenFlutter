@@ -11,8 +11,9 @@ class InitialTotalOrderState extends TotalOrderState {
 
 class CalculatedTotalOrderState extends TotalOrderState {
   final int totalQuantity;
+  final double totalAmount;
 
-  CalculatedTotalOrderState(this.totalQuantity);
+  CalculatedTotalOrderState(this.totalQuantity, this.totalAmount);
 
   @override
   List<Object> get props => [totalQuantity];

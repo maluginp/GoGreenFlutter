@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gogreen/blocs/order_lines/bloc.dart';
+import 'package:gogreen/core/dimens.dart';
 import 'package:gogreen/core/formatter.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/order_models.dart';
@@ -36,7 +37,7 @@ class OrderLinesScreen extends StatelessWidget {
                   ..add(CheckoutOrderLinesEvent());
             },
             child: Container(
-              height: 60.0,
+              height: Dimens.of(context).bottomButtonHeight,
               color: Theme.of(context).accentColor,
               child: Center(
                   child: Text('Checkout', style: Theme.of(context).accentTextTheme.button)

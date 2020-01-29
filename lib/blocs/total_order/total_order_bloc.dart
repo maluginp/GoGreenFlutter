@@ -14,12 +14,12 @@ class TotalOrderBloc extends Bloc<TotalOrderEvent, TotalOrderState> {
   TotalOrderState get initialState => InitialTotalOrderState();
 
   @override
-  Stream<TotalOrderState> mapEventToState(
-    TotalOrderEvent event,
-  ) async* {
+  Stream<TotalOrderState> mapEventToState(TotalOrderEvent event,) async* {
     if (event is GetTotalOrderEvent) {
-      List<OrderLineItem> lines = await _orderService.fetchLines();
-      yield CalculatedTotalOrderState(lines.length);
+      int totalQuantity = await _orderService.getTotalQuantity();
+      double totalAmount = await _orderService.getTotalAmount();
+
+      yield CalculatedTotalOrderState(totalQuantity, totalAmount);
     }
   }
 }

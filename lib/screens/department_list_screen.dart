@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gogreen/blocs/department_list/bloc.dart';
-import 'package:gogreen/blocs/total_quantity_order/bloc.dart';
+import 'package:gogreen/blocs/total_order/bloc.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/store_models.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
-import 'package:gogreen/widgets/total_quantity_order_widget.dart';
+import 'package:gogreen/widgets/total_order_widget.dart';
 import 'screens.dart';
 
 class DepartmentListScreen extends StatelessWidget {
@@ -38,7 +38,7 @@ class DepartmentListScreen extends StatelessWidget {
 
         return Container();
       }),
-      bottomSheet: TotalQuantityOrderWidget(),
+      bottomSheet: TotalOrderWidget(),
     );
   }
 

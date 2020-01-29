@@ -1,3 +1,4 @@
+import 'package:gogreen/core/helpers.dart';
 import 'package:gogreen/models/order_models.dart';
 import 'package:gogreen/models/store_models.dart';
 
@@ -11,6 +12,9 @@ abstract class IOrderService {
   Future<Order> checkout();
 
   Future<List<OrderLineItem>> fetchLines();
+
+  Future<int> getTotalQuantity();
+  Future<double> getTotalAmount();
 }
 
 
@@ -38,4 +42,22 @@ class OrderService extends IOrderService {
     lines.clear();
     return Future.value(Order());
   }
+
+  @override
+  Future<double> getTotalAmount() async {
+      if (lines.length > 0) {
+        return lines.map((l) => l.price).reduce(sum);
+      }
+      return 0;
+  }
+
+  @override
+  Future<int> getTotalQuantity() async {
+    if (lines.length > 0) {
+      return lines.map((l) => l.quantity).reduce(sum);
+    }
+    return 0;
+  }
+
+
 }

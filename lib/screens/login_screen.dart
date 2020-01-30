@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gogreen/blocs/login/bloc.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/screens/screens.dart';
+import 'package:gogreen/widgets/loading_widget.dart';
 import 'package:gogreen/widgets/login_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -24,14 +25,14 @@ class LoginScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is InitialLoginState) {
+          if (state is NotSignedInLoginState) {
             return Container(
               padding: EdgeInsets.all(16.0),
               child: LoginWidget(),
             );
           }
 
-          return Container();
+          return LoadingWidget();
         },
       ),
     );
@@ -43,7 +44,8 @@ class LoginScreen extends StatelessWidget {
         BlocProvider<LoginBloc>(
           create: (ctx) => LoginBloc(
             Injector().logService,
-          ),
+            Injector().authService,
+          )..add(CheckLoginEvent()),
         ),
       ],
       child: LoginScreen(),

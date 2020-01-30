@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:gogreen/services/log_service.dart';
+import 'package:gogreen/services/services.dart';
 import './bloc.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final ILogService _logService;
+  final IAuthService _authService;
 
-  LoginBloc(this._logService);
+  LoginBloc(this._logService, this._authService);
 
   @override
   LoginState get initialState => InitialLoginState();
@@ -16,10 +17,25 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginEvent event,
   ) async* {
 
+    if (event is CheckLoginEvent) {
+      var isAuthorised = await _authService.isAuthorised();
+
+      if (isAuthorised) {
+        yield SignedInLoginState();
+      } else {
+        yield NotSignedInLoginState();
+      }
+
+    }
+
     if (event is SignInLoginEvent) {
       _logService.d('Try to sign in as "${event.username}"');
 
-      yield SignedInLoginState();
+      var isAuthorised = await _authService.auth(event.username, event.password);
+
+      if (isAuthorised) {
+        yield SignedInLoginState();
+      }
     }
 
     // TODO: Add Logic

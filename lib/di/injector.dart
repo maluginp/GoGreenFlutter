@@ -1,9 +1,14 @@
+import 'package:gogreen/core/http.dart';
 import 'package:gogreen/services/services.dart';
 
 class Injector {
   static final Injector _singleton = new Injector._internal();
 
-  static final IOrderService _orderService = OrderService();
+  final IOrderService _orderService = OrderService();
+
+  final Lazy<DenovoHttpClient> _denovoHttpClient = Lazy(() {
+    return DenovoHttpClient(TokenService());
+  });
 
   factory Injector() {
     return _singleton;
@@ -37,5 +42,30 @@ class Injector {
 
   IOrderHistoryService get orderHistoryService {
     return OrderHistoryService();
+  }
+
+  IAuthService get authService {
+    return AuthService(denovoHttpClient, TokenService());
+  }
+
+  DenovoHttpClient get denovoHttpClient {
+    return _denovoHttpClient.get();
+  }
+
+}
+
+class Lazy<T> {
+  final Function _func;
+  bool _isEvaluated = false;
+  Lazy(this._func);
+  T _value;
+  T get() {
+    if(!_isEvaluated) {
+      if(_func != null) {
+        _value = _func();
+      }
+      _isEvaluated = true;
+    }
+    return _value;
   }
 }

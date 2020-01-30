@@ -25,7 +25,12 @@ class DenovoHttpClient extends BaseClient {
   Future<Response> post(url,
       {Map<String, String> headers, body, Encoding encoding}) {
 
-    return super.post("$_path$url", headers: headers, body: body, encoding: encoding);
+    return super.post("$_path/$url", headers: headers, body: body, encoding: encoding);
+  }
+
+  @override
+  Future<Response> get(url, {Map<String, String> headers}) {
+      return super.get("$_path/$url", headers: headers);
   }
 
 

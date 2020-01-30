@@ -20,7 +20,7 @@ class AuthService extends IAuthService {
   @override
   Future<bool> auth(String username, String password) async {
     Response response = await _denovoHttpClient.post(
-      '/Token',
+      'Token',
       body: {
         'grant_type': 'password',
         'username': username,

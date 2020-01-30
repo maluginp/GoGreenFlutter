@@ -21,7 +21,7 @@ class Injector {
   }
 
   ILocationService get locationService{
-    return LocationService();
+    return LocationService(denovoHttpClient);
   }
 
   ITransactionService get transactionService {

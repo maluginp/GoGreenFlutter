@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 class GoGreenTheme {
   static ThemeData theme = ThemeData(
-      primarySwatch: Colors.green,
-      textTheme: _textTheme,
-      accentColor: Colors.green,
-      accentTextTheme: _accentTextTheme,
-      buttonTheme: ButtonThemeData(
-        buttonColor: Colors.green,
-        textTheme: ButtonTextTheme.primary
-      )
+    primarySwatch: Colors.green,
+    textTheme: _textTheme,
+    accentColor: Colors.green,
+    accentTextTheme: _accentTextTheme,
+    disabledColor: Colors.grey,
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors.green,
+      textTheme: ButtonTextTheme.primary,
+    ),
   );
 
   static const _regular = FontWeight.w400;
@@ -21,18 +22,18 @@ class GoGreenTheme {
   static const _oswald = 'Oswald';
 
   static TextTheme _textTheme = TextTheme(
-      display1: TextStyle(
-        fontFamily: _montserrat,
-        fontWeight: _bold,
-        fontSize: 20.0,
-      )
+    display1: TextStyle(
+      fontFamily: _montserrat,
+      fontWeight: _bold,
+      fontSize: 20.0,
+    ),
   );
 
   static TextTheme _accentTextTheme = TextTheme(
-      button: TextStyle(
-        fontFamily: _montserrat,
-        color: Colors.white,
-        fontWeight: _regular,
-      )
+    button: TextStyle(
+      fontFamily: _montserrat,
+      color: Colors.white,
+      fontWeight: _regular,
+    ),
   );
 }

@@ -11,24 +11,37 @@ class TotalOrderWidget extends StatelessWidget {
     return BlocBuilder<TotalOrderBloc, TotalOrderState>(
       builder: (context, state) {
         if (state is CalculatedTotalOrderState) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                OrderLinesScreen.ROUTE_PATH,
-              );
-            },
-            child: Container(
+          if (state.totalQuantity > 0) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  OrderLinesScreen.ROUTE_PATH,
+                );
+              },
+              child: Container(
+                height: Dimens.of(context).bottomButtonHeight,
+                color: Theme.of(context).accentColor,
+                child: Center(
+                  child: Text(
+                    "Checkout ${Formatter.currency(state.totalAmount)}"
+                        .toUpperCase(),
+                    style: Theme.of(context).accentTextTheme.button,
+                  ),
+                ),
+              ),
+            );
+          } else {
+            return Container(
               height: Dimens.of(context).bottomButtonHeight,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).disabledColor,
               child: Center(
                 child: Text(
-                  "Checkout ${Formatter.currency(state.totalAmount)}"
-                      .toUpperCase(),
+                  "Checkout".toUpperCase(),
                   style: Theme.of(context).accentTextTheme.button,
                 ),
               ),
-            ),
-          );
+            );
+          }
         }
 
         return Container();

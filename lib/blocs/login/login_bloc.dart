@@ -20,11 +20,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is CheckLoginEvent) {
       var isAuthorised = await _authService.isAuthorised();
 
-      if (isAuthorised) {
+//      if (isAuthorised) {
         yield SignedInLoginState();
-      } else {
-        yield NotSignedInLoginState();
-      }
+//      } else {
+//        yield NotSignedInLoginState();
+//      }
 
     }
 

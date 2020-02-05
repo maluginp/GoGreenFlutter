@@ -16,3 +16,7 @@ class ResourcePage<T> {
      );
   }
 }
+
+enum DocumentType {
+  License, PrivacyPolicy
+}

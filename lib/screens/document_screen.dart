@@ -7,6 +7,8 @@ import 'package:gogreen/models/common_models.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
 
 class DocumentScreen extends StatelessWidget {
+  static const String ROUTE_PATH = "/documents";
+
   final DocumentType _type;
 
   const DocumentScreen(this._type);

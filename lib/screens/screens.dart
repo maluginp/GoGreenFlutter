@@ -9,3 +9,4 @@ export 'store_list_screen.dart';
 export 'transaction_list_screen.dart';
 export 'transaction_receipt_screen.dart';
 export 'modifier_list_screen.dart';
+export 'document_screen.dart';

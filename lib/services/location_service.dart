@@ -23,8 +23,8 @@ class LocationService implements ILocationService {
       var body = json.decode(response.body);
       var resource = ResourcePage.fromJson(body, (i) => Location.fromJson(i));
       return resource.items;
-    } else {
-      return [];
     }
+
+    return [];
   }
 }

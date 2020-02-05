@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'di/injector.dart';
 import 'generated/i18n.dart';
 import 'gogreen_theme.dart';
 import 'screens/screens.dart';
@@ -29,9 +30,10 @@ class MyApp extends StatelessWidget {
       theme: GoGreenTheme.theme,
       localizationsDelegates: [S.delegate],
       supportedLocales: S.delegate.supportedLocales,
+      navigatorKey: Injector().navigationService.navigatorKey,
       initialRoute: '/',
       routes: {
-        '/': (ctx) => LoginScreen.open(ctx),
+        LoginScreen.ROUTE_PATH: (ctx) => LoginScreen.open(ctx),
         LocationListScreen.ROUTE_PATH: (ctx) => LocationListScreen.open(ctx),
         TransactionListScreen.ROUTE_PATH: (ctx) => TransactionListScreen.open(ctx),
         TransactionReceiptScreen.ROUTE_PATH: (ctx) => TransactionReceiptScreen.open(ctx),
@@ -41,8 +43,8 @@ class MyApp extends StatelessWidget {
         OrderLinesScreen.ROUTE_PATH: (ctx) => OrderLinesScreen.open(ctx),
         OrderListScreen.ROUTE_PATH: (ctx) => OrderListScreen.open(ctx),
         ModifierListScreen.ROUTE_PATH: (ctx) => ModifierListScreen.open(ctx, ModifierListArgument([])),
-        DocumentScreen.ROUTE_PATH: (ctx) => DocumentScreen.open(ctx, _getArg(ctx))
-
+        DocumentScreen.ROUTE_PATH: (ctx) => DocumentScreen.open(ctx, _getArg(ctx)),
+        SettingsScreen.ROUTE_PATH: (ctx) => SettingsScreen.open(ctx)
       }
     );
   }

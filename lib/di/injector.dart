@@ -11,6 +11,10 @@ class Injector {
     return DenovoHttpClient(TokenService());
   });
 
+  final Lazy<INavigationService> _navigationService = Lazy(() {
+    return NavigationService();
+  });
+
   factory Injector() {
     return _singleton;
   }
@@ -63,6 +67,10 @@ class Injector {
 
   IAlertService alertService(BuildContext context) {
     return AlertService(context);
+  }
+
+  INavigationService get navigationService {
+    return _navigationService.get();
   }
 
 }

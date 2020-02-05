@@ -1,7 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/services/services.dart';
 import 'package:http/http.dart';
+
+import 'helpers.dart';
 
 class DenovoHttpClient extends BaseClient {
   final ITokenService _tokenService;
@@ -24,14 +28,25 @@ class DenovoHttpClient extends BaseClient {
   @override
   Future<Response> post(url,
       {Map<String, String> headers, body, Encoding encoding}) {
-
-    return super.post("$_path/$url", headers: headers, body: body, encoding: encoding);
+    return super.post(
+      "$_path/$url",
+      headers: headers,
+      body: body,
+      encoding: encoding,
+    ).then(handleResponse);
   }
 
   @override
   Future<Response> get(url, {Map<String, String> headers}) {
-      return super.get("$_path/$url", headers: headers);
+    return super.get("$_path/$url", headers: headers).then(handleResponse);
   }
 
+  FutureOr<Response> handleResponse(Response response) async {
+    if (HttpHelper.isUnauthorised(response)) {
+      await Injector().authService.logout();
+      await Injector().navigationService.logout();
+    }
 
+    return response;
+  }
 }

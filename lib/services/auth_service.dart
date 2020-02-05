@@ -9,6 +9,7 @@ abstract class IAuthService {
   Future<void> auth(String username, String password);
 
   Future<bool> isAuthorised();
+  Future<void> logout();
 }
 
 class AuthService extends IAuthService {
@@ -46,6 +47,13 @@ class AuthService extends IAuthService {
 
     return token.isNotEmpty;
   }
+
+  @override
+  Future<Function> logout() async {
+    await _tokenService.setDenovoToken("");
+  }
+
+
 }
 
 /// Exceptions

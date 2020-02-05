@@ -7,6 +7,8 @@ import 'package:gogreen/widgets/loading_widget.dart';
 import 'package:gogreen/widgets/login_widget.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const String ROUTE_PATH = "/";
+
   const LoginScreen();
 
   @override

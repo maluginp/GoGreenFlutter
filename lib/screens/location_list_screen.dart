@@ -7,6 +7,8 @@ import 'package:gogreen/screens/transaction_list_screen.dart';
 import 'package:gogreen/widgets/filter_widget.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
 
+import 'screens.dart';
+
 class LocationListScreen extends StatelessWidget {
   static const String ROUTE_PATH = "/locations";
 
@@ -17,6 +19,16 @@ class LocationListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Locations'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                SettingsScreen.ROUTE_PATH,
+              );
+            },
+          ),
+        ],
       ),
       body: BlocBuilder<LocationListBloc, LocationListState>(
           builder: (context, LocationListState state) {

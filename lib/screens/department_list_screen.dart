@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gogreen/blocs/department_list/bloc.dart';
 import 'package:gogreen/blocs/total_order/bloc.dart';
 import 'package:gogreen/di/injector.dart';
+import 'package:gogreen/generated/i18n.dart';
 import 'package:gogreen/models/store_models.dart';
 import 'package:gogreen/widgets/icon_badge_widget.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
@@ -18,7 +19,7 @@ class DepartmentListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Departments'),
+        title: Text(S.of(context).departments),
         actions: <Widget>[
           BlocBuilder<TotalOrderBloc, TotalOrderState>(
             builder: (context, state) {

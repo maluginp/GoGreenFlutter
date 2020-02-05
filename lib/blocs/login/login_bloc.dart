@@ -6,8 +6,10 @@ import './bloc.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final ILogService _logService;
   final IAuthService _authService;
+  final IErrorService _errorService;
+  final IAlertService _alertService;
 
-  LoginBloc(this._logService, this._authService);
+  LoginBloc(this._logService, this._authService, this._errorService, this._alertService);
 
   @override
   LoginState get initialState => InitialLoginState();
@@ -16,25 +18,25 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapEventToState(
     LoginEvent event,
   ) async* {
-
     if (event is CheckLoginEvent) {
       var isAuthorised = await _authService.isAuthorised();
 
-//      if (isAuthorised) {
+      if (isAuthorised) {
         yield SignedInLoginState();
-//      } else {
-//        yield NotSignedInLoginState();
-//      }
-
+      } else {
+        yield NotSignedInLoginState();
+      }
     }
 
     if (event is SignInLoginEvent) {
       _logService.d('Try to sign in as "${event.username}"');
 
-      var isAuthorised = await _authService.auth(event.username, event.password);
+      try {
+        await _authService.auth(event.username, event.password);
 
-      if (isAuthorised) {
         yield SignedInLoginState();
+      } on Exception catch (ex) {
+        _alertService.showError(_errorService.getMessage(ex));
       }
     }
 

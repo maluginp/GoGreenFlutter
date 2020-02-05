@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 import 'services.dart';
 
 abstract class IAuthService {
-  Future<bool> auth(String username, String password);
+  Future<void> auth(String username, String password);
 
   Future<bool> isAuthorised();
 }
@@ -18,7 +18,7 @@ class AuthService extends IAuthService {
   AuthService(this._denovoHttpClient, this._tokenService);
 
   @override
-  Future<bool> auth(String username, String password) async {
+  Future<void> auth(String username, String password) async {
     Response response = await _denovoHttpClient.post(
       'Token',
       body: {
@@ -34,10 +34,10 @@ class AuthService extends IAuthService {
 
       await _tokenService.setDenovoToken(token);
 
-      return true;
+      return;
     }
 
-    return false;
+    throw SignInFailed();
   }
 
   @override
@@ -46,4 +46,9 @@ class AuthService extends IAuthService {
 
     return token.isNotEmpty;
   }
+}
+
+/// Exceptions
+class SignInFailed implements Exception {
+  const SignInFailed();
 }

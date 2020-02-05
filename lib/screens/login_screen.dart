@@ -45,6 +45,8 @@ class LoginScreen extends StatelessWidget {
           create: (ctx) => LoginBloc(
             Injector().logService,
             Injector().authService,
+            Injector().errorService(context),
+            Injector().alertService(context)
           )..add(CheckLoginEvent()),
         ),
       ],

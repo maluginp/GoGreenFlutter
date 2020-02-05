@@ -57,6 +57,14 @@ class Injector {
     return FileService(context);
   }
 
+  IErrorService errorService(BuildContext context) {
+    return ErrorService(context);
+  }
+
+  IAlertService alertService(BuildContext context) {
+    return AlertService(context);
+  }
+
 }
 
 class Lazy<T> {

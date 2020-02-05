@@ -6,3 +6,5 @@ export 'order_service.dart';
 export 'auth_service.dart';
 export 'token_service.dart';
 export 'file_service.dart';
+export 'alert_service.dart';
+export 'error_service.dart';

@@ -7,8 +7,9 @@ import './bloc.dart';
 class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
   final DocumentType _type;
   final ILogService _logService;
+  final IFileService _fileService;
 
-  DocumentBloc(this._type, this._logService);
+  DocumentBloc(this._type, this._logService, this._fileService);
 
   @override
   DocumentState get initialState => LoadingDocumentState();
@@ -18,10 +19,12 @@ class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
     DocumentEvent event,
   ) async* {
     if (event is LoadDocumentEvent) {
-      // TODO: Loading document from assets
-      yield LoadedHtmlDocumentState("""
-        <h1>Test</h1>
-      """);
+      String html = await _fileService.loadContentFromAssets(_getFilenameByType());
+      yield LoadedHtmlDocumentState(html);
     }
+  }
+
+  String _getFilenameByType() {
+    return "assets/license.html";
   }
 }

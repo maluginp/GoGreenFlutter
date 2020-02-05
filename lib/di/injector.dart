@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:gogreen/core/http.dart';
 import 'package:gogreen/services/services.dart';
 
@@ -50,6 +51,10 @@ class Injector {
 
   DenovoHttpClient get denovoHttpClient {
     return _denovoHttpClient.get();
+  }
+
+  IFileService fileService(BuildContext context) {
+    return FileService(context);
   }
 
 }

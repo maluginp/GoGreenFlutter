@@ -5,3 +5,4 @@ export 'store_service.dart';
 export 'order_service.dart';
 export 'auth_service.dart';
 export 'token_service.dart';
+export 'file_service.dart';

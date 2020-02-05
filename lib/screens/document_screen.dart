@@ -51,7 +51,8 @@ class DocumentScreen extends StatelessWidget {
         BlocProvider<DocumentBloc>(
           create: (ctx) => DocumentBloc(
             arguments.type,
-            Injector().logService
+            Injector().logService,
+            Injector().fileService(context)
           )..add(LoadDocumentEvent()),
         ),
       ],

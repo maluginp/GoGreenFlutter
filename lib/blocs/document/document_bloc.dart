@@ -17,6 +17,11 @@ class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
   Stream<DocumentState> mapEventToState(
     DocumentEvent event,
   ) async* {
-    // TODO: Add Logic
+    if (event is LoadDocumentEvent) {
+      // TODO: Loading document from assets
+      yield LoadedHtmlDocumentState("""
+        <h1>Test</h1>
+      """);
+    }
   }
 }

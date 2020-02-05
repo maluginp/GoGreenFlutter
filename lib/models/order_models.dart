@@ -28,6 +28,17 @@ class OrderLineItem {
   }
 }
 
-class OrderListItemModifier {
+class OrderLineItemModifier {
+  String guid;
+  String modifierGuid;
+  String name;
 
+  List<OrderLineItemOption> options;
+}
+
+class OrderLineItemOption {
+  String guid;
+  String optionGuid;
+  double price;
+  String name;
 }

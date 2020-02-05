@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
         DepartmentListScreen.ROUTE_PATH: (ctx) => DepartmentListScreen.open(ctx),
         GoodListScreen.ROUTE_PATH: (ctx) => GoodListScreen.open(ctx, _getArg(ctx)),
         OrderLinesScreen.ROUTE_PATH: (ctx) => OrderLinesScreen.open(ctx),
-        OrderListScreen.ROUTE_PATH: (ctx) => OrderListScreen.open(ctx)
+        OrderListScreen.ROUTE_PATH: (ctx) => OrderListScreen.open(ctx),
+        ModifierListScreen.ROUTE_PATH: (ctx) => ModifierListScreen.open(ctx),
       }
     );
   }

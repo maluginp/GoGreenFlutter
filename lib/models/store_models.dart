@@ -21,11 +21,15 @@ class SubDepartmentGood extends Good {
 }
 
 class Modifier {
-
+  String guid;
+  String name;
+  List<Option> options;
 }
 
 class Option {
-
+  String guid;
+  String name;
+  double price;
 }
 
 class Service {

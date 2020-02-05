@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (ctx) => LoginScreen.open(ctx),
-        '/locations': (ctx) => LocationListScreen.open(ctx),
+        LocationListScreen.ROUTE_PATH: (ctx) => LocationListScreen.open(ctx),
         TransactionListScreen.ROUTE_PATH: (ctx) => TransactionListScreen.open(ctx),
         TransactionReceiptScreen.ROUTE_PATH: (ctx) => TransactionReceiptScreen.open(ctx),
         StoreListScreen.ROUTE_PATH: (ctx) => StoreListScreen.open(ctx),

@@ -8,6 +8,8 @@ import 'package:gogreen/widgets/filter_widget.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
 
 class LocationListScreen extends StatelessWidget {
+  static const String ROUTE_PATH = "/locations";
+
   const LocationListScreen();
 
   @override

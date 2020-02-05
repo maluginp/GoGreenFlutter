@@ -18,10 +18,12 @@ class LoginScreen extends StatelessWidget {
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is SignedInLoginState) {
-//              Navigator.of(context).pushReplacementNamed('/locations');
             Navigator.of(context).pushReplacementNamed(
-              StoreListScreen.ROUTE_PATH,
+              LocationListScreen.ROUTE_PATH,
             );
+//            Navigator.of(context).pushReplacementNamed(
+//              StoreListScreen.ROUTE_PATH,
+//            );
           }
         },
         builder: (context, state) {
@@ -43,11 +45,11 @@ class LoginScreen extends StatelessWidget {
       providers: [
         BlocProvider<LoginBloc>(
           create: (ctx) => LoginBloc(
-            Injector().logService,
-            Injector().authService,
-            Injector().errorService(context),
-            Injector().alertService(context)
-          )..add(CheckLoginEvent()),
+              Injector().logService,
+              Injector().authService,
+              Injector().errorService(context),
+              Injector().alertService(context))
+            ..add(CheckLoginEvent()),
         ),
       ],
       child: LoginScreen(),

@@ -22,10 +22,11 @@ class LocationListScreen extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.of(context).pushNamed(
+            onPressed: () async {
+              await Navigator.of(context).pushNamed(
                 SettingsScreen.ROUTE_PATH,
               );
+              BlocProvider.of<LocationListBloc>(context).add(FetchLocationListEvent(null));
             },
           ),
         ],

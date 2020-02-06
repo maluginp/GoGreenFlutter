@@ -30,7 +30,7 @@ class Injector {
   }
 
   ITransactionService get transactionService {
-    return TransactionService();
+    return TransactionService(denovoHttpClient);
   }
 
   IStoreLocationsService get storeLocationsService {

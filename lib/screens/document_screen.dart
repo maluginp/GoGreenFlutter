@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:gogreen/blocs/document/bloc.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/common_models.dart';
@@ -24,13 +24,16 @@ class DocumentScreen extends StatelessWidget {
           if (state is LoadingDocumentState) {
             return LoadingWidget();
           }
-          
+
           if (state is LoadedHtmlDocumentState) {
-            return SingleChildScrollView(
-                child: Html(data: state.html)
+            return WebviewScaffold(
+              url: Uri.dataFromString(
+                state.html,
+                mimeType: 'text/html',
+              ).toString(),
             );
           }
-          
+
           return Container();
         },
       ),
@@ -38,7 +41,7 @@ class DocumentScreen extends StatelessWidget {
   }
 
   String _getTitleByType() {
-    switch(_type) {
+    switch (_type) {
       case DocumentType.License:
         return "License";
       case DocumentType.PrivacyPolicy:
@@ -51,11 +54,9 @@ class DocumentScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<DocumentBloc>(
-          create: (ctx) => DocumentBloc(
-            arguments.type,
-            Injector().logService,
-            Injector().fileService(context)
-          )..add(LoadDocumentEvent()),
+          create: (ctx) => DocumentBloc(arguments.type, Injector().logService,
+              Injector().fileService(context))
+            ..add(LoadDocumentEvent()),
         ),
       ],
       child: DocumentScreen(arguments.type),

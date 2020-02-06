@@ -22,7 +22,7 @@ class LocationListBloc extends Bloc<LocationListEvent, LocationListState> {
         _logService.d('Fetch locations with filter=${event.filter}');
         yield LoadingLocationListState(event.filter);
 
-        List<Location> locations = await _locationService.fetchLocations(event.filter);
+        List<Location> locations = await _locationService.fetchLocations(event.filter, 1);
 
         yield FetchedLocationListState(event.filter, locations);
       }

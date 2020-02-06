@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:http/http.dart';
 import 'package:uuid/uuid.dart';
 
@@ -10,6 +12,10 @@ class GuidHelper {
 class HttpHelper {
   static bool isUnauthorised(Response response) {
     return response.statusCode == 401;
+  }
+
+  static double parseWebAmount(int amount) {
+    return (amount / 100.0);
   }
 }
 

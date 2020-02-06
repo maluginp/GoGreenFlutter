@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.ROUTE_PATH: (ctx) => LoginScreen.open(ctx),
         LocationListScreen.ROUTE_PATH: (ctx) => LocationListScreen.open(ctx),
         TransactionListScreen.ROUTE_PATH: (ctx) => TransactionListScreen.open(ctx),
-        TransactionReceiptScreen.ROUTE_PATH: (ctx) => TransactionReceiptScreen.open(ctx),
+        TransactionReceiptScreen.ROUTE_PATH: (ctx) => TransactionReceiptScreen.open(ctx, _getArg(ctx)),
         StoreListScreen.ROUTE_PATH: (ctx) => StoreListScreen.open(ctx),
         DepartmentListScreen.ROUTE_PATH: (ctx) => DepartmentListScreen.open(ctx),
         GoodListScreen.ROUTE_PATH: (ctx) => GoodListScreen.open(ctx, _getArg(ctx)),

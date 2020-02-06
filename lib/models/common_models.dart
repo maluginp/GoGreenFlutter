@@ -11,10 +11,17 @@ class ResourcePage<T> {
      List<dynamic> items = json["items"];
 
      return ResourcePage(
-       items: items.map(itemMapper),
+       items: items.map(itemMapper).toList(),
        count: json["count"]
      );
   }
+
+  @override
+  String toString() {
+    return 'ResourcePage{items: $items, count: $count}';
+  }
+
+
 }
 
 enum DocumentType {

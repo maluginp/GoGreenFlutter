@@ -23,7 +23,7 @@ class TransactionListBloc extends Bloc<TransactionListEvent, TransactionListStat
       _logService.d('Fetch locations with filter=${event.filter}');
       yield LoadingTransactionListState(event.filter);
 
-      List<Transaction> transactions = await _transactionService.fetchTransactions(event.filter);
+      List<Transaction> transactions = await _transactionService.fetchTransactions(event.filter, _location.id, 1);
 
       yield FetchedTransactionListState(event.filter, transactions);
     }

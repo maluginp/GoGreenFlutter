@@ -55,10 +55,13 @@ class TransactionListScreen extends StatelessWidget {
       itemBuilder: (context, i) {
         var transaction = transactions[i];
         return ListTile(
-          title: Text(transaction.amount),
+          title: Text("${transaction.totalAmount}"),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: () {
-            Navigator.of(context).pushNamed(TransactionReceiptScreen.ROUTE_PATH, arguments: transaction);
+            Navigator.of(context).pushNamed(
+              TransactionReceiptScreen.ROUTE_PATH,
+              arguments: TransactionReceiptArguments(transaction),
+            );
           },
         );
       },

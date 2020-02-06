@@ -4,7 +4,9 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:gogreen/blocs/transaction_receipt/bloc.dart';
 import 'package:gogreen/core/dimens.dart';
 import 'package:gogreen/di/injector.dart';
+import 'package:gogreen/generated/i18n.dart';
 import 'package:gogreen/models/transaction_model.dart';
+import 'package:gogreen/widgets/bottom_button.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
 
 class TransactionReceiptScreen extends StatelessWidget {
@@ -42,17 +44,12 @@ class TransactionReceiptScreen extends StatelessWidget {
       bottomSheet: BlocBuilder<TransactionReceiptBloc, TransactionReceiptState>(
           builder: (context, TransactionReceiptState state) {
         if (state is LoadedTransactionReceiptState) {
-          return SizedBox(
-            height: Dimens.of(context).bottomButtonHeight,
-            width: double.infinity,
-            child: FlatButton(
-              onPressed: () {
-                BlocProvider.of<TransactionReceiptBloc>(context)
-                    .add(ShareTransactionReceiptEvent());
-              },
-              color: Theme.of(context).accentColor,
-              child: Text('Share'.toUpperCase()),
-            ),
+          return BottomButton(
+            text: S.of(context).share,
+            onPressed: () {
+              BlocProvider.of<TransactionReceiptBloc>(context)
+                  .add(ShareTransactionReceiptEvent());
+            },
           );
         }
 

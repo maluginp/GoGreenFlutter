@@ -22,6 +22,7 @@ class S implements WidgetsLocalizations {
   TextDirection get textDirection => TextDirection.ltr;
 
   String get departments => "Departments";
+  String get share => "Share";
   String get validation_required => "Required";
 }
 

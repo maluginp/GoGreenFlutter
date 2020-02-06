@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:gogreen/blocs/transaction_receipt/bloc.dart';
 import 'package:gogreen/di/injector.dart';
 import 'package:gogreen/models/transaction_model.dart';
 import 'package:gogreen/widgets/loading_widget.dart';
-import 'package:html/dom.dart' as dom;
 
 class TransactionReceiptScreen extends StatelessWidget {
   static const String ROUTE_PATH = "/receipt";

@@ -22,13 +22,23 @@ class LocationService implements ILocationService {
       throw Exception("page must be great than 0, current=$page");
     }
 
-    var response = await _denovoHttpClient.getWithArgs(
-      "api/consumers/locations",
-      query: {
+    Map<String, Object> query = {};
+
+    if (filter != null) {
+      if (filter.name != null && filter.name.isNotEmpty) {
+        query['locationName'] = filter.name;
+      }
+    }
+
+    query.addAll(
+      {
         "take": ITEMS_ON_PAGE,
         "skip": ITEMS_ON_PAGE * (page - 1),
       },
     );
+
+    var response = await _denovoHttpClient
+        .getWithArgs("api/consumers/locations", query: query);
 
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
